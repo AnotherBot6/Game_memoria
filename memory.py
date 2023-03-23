@@ -18,6 +18,7 @@ car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
+nTaps = 0
 
 
 def square(x, y):
@@ -45,6 +46,8 @@ def xy(count):
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+    global nTaps 
+    nTaps += 1
     spot = index(x, y)
     mark = state['mark']
 
@@ -62,6 +65,7 @@ def draw():
     goto(0, 0)
     shape(car)
     stamp()
+    
 
     for count in range(64):
         if hide[count]:
@@ -76,7 +80,9 @@ def draw():
         goto(x + 2, y)
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
-
+    up()
+    goto(0,180)
+    write(f"Taps: {nTaps}", align="center",font=('Arial', 10, 'normal'))
     update()
     ontimer(draw, 100)
 
