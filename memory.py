@@ -80,7 +80,7 @@ def draw():
          #   goto(x + 3, y+2)
         goto(x + 3, y+2)
         color('black')
-        write(tiles[mark], font=('Arial', 28, 'normal'))
+        write(tiles[mark], font=('Arial', 26, 'normal'))
         
 
     update()
