@@ -19,6 +19,7 @@ emojis = [":)","^-^",":D","^o^","*^*","-_-",":/",":(","=_=","!_!","X.X","~_~","o
 tiles = emojis * 2
 state = {'mark': None}
 hide = [True] * 64
+nTaps = 0
 
 
 def square(x, y):
@@ -46,6 +47,8 @@ def xy(count):
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+    global nTaps 
+    nTaps += 1
     spot = index(x, y)
     mark = state['mark']
 
@@ -63,11 +66,25 @@ def draw():
     goto(0, 0)
     shape(car)
     stamp()
+    
 
+    
     for count in range(64):
         if hide[count]:
             x, y = xy(count)
             square(x, y)
+        else: 
+            # Game Finished: win
+            if True not in hide:
+                goto(0,0)
+                color('white')
+                write("YOU WIN!", font=('Arial', 30, 'normal'), align='center')
+                goto(0,-20)
+                write(f"Taps: {nTaps}", font=('Arial', 10, 'normal'), align='center')
+                print("You win!")
+                return
+            pass
+            
 
     mark = state['mark']
 
@@ -80,9 +97,11 @@ def draw():
          #   goto(x + 3, y+2)
         goto(x + 3, y+2)
         color('black')
-        write(tiles[mark], font=('Arial', 26, 'normal'))
-        
 
+        write(tiles[mark], font=('Arial', 26, 'normal'))
+    up()
+    goto(0, -190)
+    write(f"Taps: {nTaps}", align="center",font=('Arial', 10, 'normal'))
     update()
     ontimer(draw, 100)
 
