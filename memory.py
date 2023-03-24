@@ -100,7 +100,7 @@ def draw():
     ontimer(draw, 100)
 
 
-#shuffle(tiles)
+shuffle(tiles)
 setup(420, 420, 370, 0)
 addshape(car)
 hideturtle()
