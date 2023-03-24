@@ -67,10 +67,23 @@ def draw():
     stamp()
     
 
+    
     for count in range(64):
         if hide[count]:
             x, y = xy(count)
             square(x, y)
+        else: 
+            # Game Finished: win
+            if True not in hide:
+                goto(0,0)
+                color('white')
+                write("YOU WIN!", font=('Arial', 30, 'normal'), align='center')
+                goto(0,-20)
+                write(f"Taps: {nTaps}", font=('Arial', 10, 'normal'), align='center')
+                print("You win!")
+                return
+            pass
+            
 
     mark = state['mark']
 
@@ -81,17 +94,18 @@ def draw():
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
     up()
-    goto(0,180)
+    goto(0, -190)
     write(f"Taps: {nTaps}", align="center",font=('Arial', 10, 'normal'))
     update()
     ontimer(draw, 100)
 
 
-shuffle(tiles)
+#shuffle(tiles)
 setup(420, 420, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
+print(tiles)
 onscreenclick(tap)
 draw()
 done()
