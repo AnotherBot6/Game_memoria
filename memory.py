@@ -2,7 +2,7 @@
 
 Exercises:
 
-1. Count and print how many taps occur.
+1. Count and print how many taps occur.yu
 2. Decrease the number of tiles to a 4x4 grid.
 3. Detect when all tiles are revealed.
 4. Center single-digit tile.
@@ -15,7 +15,8 @@ from turtle import *
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
+emojis = [":)","^-^",":D","^o^","*^*","-_-",":/",":(","=_=","!_!","X.X","~_~","o_o",">_<","._.",";)",":3",":v","o.O","8)","^.^","+.+",":D","·u·","$_$","7_7","<3","r.r","ç_ç","#.#","€_€","¬.¬"]
+tiles = emojis * 2
 state = {'mark': None}
 hide = [True] * 64
 
@@ -73,9 +74,14 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        #if tiles[mark] < 10:
+           # goto(x + 15, y+2)
+        #else:
+         #   goto(x + 3, y+2)
+        goto(x + 3, y+2)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(tiles[mark], font=('Arial', 28, 'normal'))
+        
 
     update()
     ontimer(draw, 100)
